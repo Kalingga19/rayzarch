@@ -3,37 +3,90 @@
 @section('title', 'Message - Rayzarchitecture')
 
 @section('content')
-    <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">Leave a note</h1>
-    <p class="text-sm text-neutral-600 mt-2">Kritik / saran / pesan (minimal form).</p>
+    <div class="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Header Section -->
+            <div class="border-b border-neutral-200 pb-8 mb-10">
+                <h1 class="text-4xl sm:text-5xl font-light tracking-tight text-black mb-3">
+                    Leave a note
+                </h1>
+                <p class="text-base text-neutral-500 font-light">
+                    Kritik / saran / pesan (minimal form).
+                </p>
+            </div>
 
-    <form method="POST" action="{{ route('feedback.store') }}" class="mt-6 max-w-xl space-y-4">
-        @csrf
+            <!-- Form Section -->
+            <form method="POST" action="{{ route('feedback.store') }}" class="space-y-8">
+                @csrf
 
-        <div>
-            <label class="text-sm text-neutral-600">Name</label>
-            <input name="name" required
-                   class="mt-1 w-full rounded-2xl border border-neutral-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-300"
-                   value="{{ old('name') }}">
-            @error('name') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
+                <!-- Name Field -->
+                <div class="group">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-900 font-medium mb-3">
+                        Name
+                    </label>
+                    <input 
+                        name="name" 
+                        required
+                        class="w-full border-0 border-b-2 border-neutral-200 px-0 py-3 text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none focus:border-black transition-colors duration-300"
+                        value="{{ old('name') }}"
+                        placeholder="Your name">
+                    @error('name') 
+                        <p class="text-xs text-black mt-2 font-medium">{{ $message }}</p> 
+                    @enderror
+                </div>
+
+                <!-- Email Field -->
+                <div class="group">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-900 font-medium mb-3">
+                        Email <span class="text-neutral-400 normal-case">(optional)</span>
+                    </label>
+                    <input 
+                        name="email" 
+                        type="email"
+                        class="w-full border-0 border-b-2 border-neutral-200 px-0 py-3 text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none focus:border-black transition-colors duration-300"
+                        value="{{ old('email') }}"
+                        placeholder="your@email.com">
+                    @error('email') 
+                        <p class="text-xs text-black mt-2 font-medium">{{ $message }}</p> 
+                    @enderror
+                </div>
+
+                <!-- Message Field -->
+                <div class="group">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-900 font-medium mb-3">
+                        Message
+                    </label>
+                    <textarea 
+                        name="message" 
+                        rows="6" 
+                        required
+                        class="w-full border-0 border-b-2 border-neutral-200 px-0 py-3 text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none focus:border-black transition-colors duration-300 resize-none"
+                        placeholder="Write your message here...">{{ old('message') }}</textarea>
+                    @error('message') 
+                        <p class="text-xs text-black mt-2 font-medium">{{ $message }}</p> 
+                    @enderror
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-6">
+                    <button 
+                        type="submit"
+                        class="group relative w-full sm:w-auto px-12 py-4 bg-black text-white text-sm uppercase tracking-wider font-medium overflow-hidden transition-all duration-300 hover:bg-neutral-800">
+                        <span class="relative z-10">Send Message</span>
+                        <div class="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span class="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                            Send Message
+                        </span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer Note -->
+            <div class="mt-16 pt-8 border-t border-neutral-200">
+                <p class="text-xs text-neutral-400 tracking-wide">
+                    We appreciate your feedback and will review it carefully.
+                </p>
+            </div>
         </div>
-
-        <div>
-            <label class="text-sm text-neutral-600">Email (optional)</label>
-            <input name="email" type="email"
-                   class="mt-1 w-full rounded-2xl border border-neutral-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-300"
-                   value="{{ old('email') }}">
-            @error('email') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
-        </div>
-
-        <div>
-            <label class="text-sm text-neutral-600">Message</label>
-            <textarea name="message" rows="5" required
-                      class="mt-1 w-full rounded-2xl border border-neutral-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-300">{{ old('message') }}</textarea>
-            @error('message') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
-        </div>
-
-        <button class="px-5 py-3 rounded-2xl bg-neutral-900 text-white hover:bg-neutral-800 transition">
-            Send
-        </button>
-    </form>
+    </div>
 @endsection

@@ -34,13 +34,23 @@ Route::post('/contact', [PublicController::class, 'contactSend'])->name('contact
 
 // Admin area
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('projects', Admin\AdminProjectController::class);
-    Route::resource('notes', Admin\AdminNoteController::class);
-    Route::get('about', [Admin\AdminAboutController::class, 'edit'])->name('about.edit');
-    Route::post('about', [Admin\AdminAboutController::class, 'update'])->name('about.update');
-    Route::get('feedback', [Admin\AdminFeedbackController::class, 'index'])->name('feedback.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('projects', AdminProjectController::class);
+    Route::resource('notes', AdminNoteController::class);
+
+    Route::get('about', [AdminAboutController::class, 'edit'])->name('about.edit');
+    Route::post('about', [AdminAboutController::class, 'update'])->name('about.update');
+
+    Route::get('feedback', [AdminFeedbackController::class, 'index'])->name('feedback.index');
+
+    Route::post('projects/{project}/gallery-delete', [AdminProjectController::class, 'deleteGalleryImage'])
+    ->name('projects.gallery-delete');
+
 });
 
+Route::get('/dashboard', function () {
+    return redirect()->route('admin.projects.index');
+})->middleware('auth')->name('dashboard');
 
 require __DIR__.'/auth.php';
