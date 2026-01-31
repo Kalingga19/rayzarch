@@ -50,7 +50,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 });
 
 Route::get('/dashboard', function () {
-    return redirect()->route('admin.projects.index');
+    return redirect('/admin');
 })->middleware('auth')->name('dashboard');
+
 
 require __DIR__.'/auth.php';
