@@ -41,12 +41,12 @@
                             
                             <div class="pt-4">
                                 <a href="{{ route('projects.index') }}"
-                                   class="inline-flex items-center text-sm tracking-[0.15em] text-black hover:text-gray-600 transition-colors duration-300 group">
+                                    class="inline-flex items-center text-sm tracking-[0.15em] text-black hover:text-gray-600 transition-colors duration-300 group">
                                     <span class="font-light">EXPLORE PROJECTS</span>
                                     <svg class="w-5 h-5 ml-3 transform group-hover:translate-x-1 transition-transform duration-300" 
-                                         fill="none" 
-                                         stroke="currentColor" 
-                                         viewBox="0 0 24 24">
+                                        fill="none" 
+                                        stroke="currentColor" 
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                     </svg>
                                 </a>
